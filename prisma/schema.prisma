@@ -1,0 +1,66 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model CanalVenda {
+  id String @id
+  nome String
+  prioridade String
+  pedidos Pedido[]
+}
+
+model Separador {
+  id String @id
+  cpf String @unique
+  nome String
+  usuario Usuario?
+  separacoes Separacao[]
+}
+
+model Pedido {
+  id String @id
+  identificadorLoja String @unique
+  nomeCliente String
+  emissao String
+  canalVendaId String
+  canalVenda CanalVenda @relation(fields: [canalVendaId], references: [id])
+  produtos Produto[]
+  separacoes Separacao[]
+}
+
+model Produto {
+  id String @id
+  nome String
+  quantidade Int
+  pedido Pedido @relation(fields: [pedidoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pedidoId String
+}
+
+model Usuario {
+  id String @id
+  login String @unique
+  senha String
+  funcao String
+  separador Separador? @relation(fields: [separadorId], references: [id], onDelete: Cascade)
+  separadorId String? @unique
+}
+
+model Separacao {
+  id String @id
+  pedido Pedido @relation(fields: [pedidoId], references: [id], onDelete: Cascade, onUpdate: Cascade)
+  pedidoId String
+  separador Separador @relation(fields: [separadorId], references: [id], onDelete: Cascade)
+  separadorId String
+  status String
+}

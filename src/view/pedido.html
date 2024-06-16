@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="pt">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pedido</title>
+    <style>
+        body {
+            font-family: arial, sans-serif;
+        }
+
+        .header {
+            background-color: grey;
+            color: white;
+            padding: 8px;
+            line-height: 4px;
+        }
+
+        table {
+
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        td,
+        th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="header">
+        <p>Pedido: IDENTIFICADOR_PEDIDO</p>
+        <p>Emissão: EMISSAO</p>
+        <p>Canal: CANAL_VENDA</p>
+    </div>
+    <div class="customer">
+        <p><b>Vendido para: </b>CLIENTE_NOME</p>
+    </div>
+    <div class="produtos">
+        <table>
+            <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+            </tr>
+            PRODUTOS
+        </table>
+    </div>
+
+</body>
+
+</html>

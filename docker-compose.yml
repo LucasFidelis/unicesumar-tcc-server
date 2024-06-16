@@ -1,0 +1,25 @@
+version: '3.2'
+
+services:
+
+  db:
+    image: mariadb:10.4
+    container_name: tcc_db
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: tcc
+    ports:
+      - 3307:3306
+    volumes:
+      - ./_data/mysql:/var/lib/mysql
+
+  phpmyadmin:
+    image: phpmyadmin
+    container_name: tcc_phpmyadmin
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      - PMA_ARBITRARY=1
+      - PMA_USER=root
+      - PMA_PASSWORD=tcc
